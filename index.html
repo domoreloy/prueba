@@ -1194,7 +1194,17 @@ function showLegal(type) {
 function closeLegal() {
   document.getElementById('legalModal').classList.remove('active');
   document.body.style.overflow = 'auto'; // Restaura el scroll
+  // Limpia el hash de la URL al cerrar
+  history.pushState("", document.title, window.location.pathname + window.location.search);
 }
+
+// Abrir modal automáticamente si la URL tiene el hash (ej: #privacy)
+window.addEventListener('load', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (legalData[hash]) {
+    showLegal(hash);
+  }
+});
 </script>
 </body>
 </html>
